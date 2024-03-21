@@ -78,6 +78,8 @@ export default async function Home() {
       )
     : [];
 
+    // console.log(withoutScore);
+
   const standings = await getStandigs();
   const topScorer = await getTopScore();
 
@@ -88,7 +90,7 @@ export default async function Home() {
 
   const playerTopScore = topScorer.data[0];
 
-  console.log(highlights);
+  // console.log(highlights);
   const gameweeks = matchday.data.map((match: any) => match.gameweek);
   // console.log(gameweeks);
 
@@ -102,7 +104,7 @@ export default async function Home() {
           <div className="flex flex-col items-center justify-center text-white space-y-4 w-[1460px] h-28 mt-4 rounded-tl-3xl">
             <div className="flex flex-row">
               {Array.isArray(club.data) &&
-                club.data.map((data: any) => (
+                club.data.map((data: any, index: any) => (
                   <Image
                     key={data.team_id}
                     src={data.team_logo}
@@ -113,7 +115,7 @@ export default async function Home() {
                 ))}
             </div>
             <div className="flex justify-center min-w-full relative  bg-sky-600 backdrop-brightness-200 py-[1.6rem] rounded-tl-3xl">
-              <div className="flex lg:space-x-20 xl:space-x-16 items-center justify-center -ml-64 gap-10">
+              <div className="flex md:space-x-1 md:-mr-28 lg:space-x-20 xl:space-x-16 items-center text-base justify-center -ml-64 gap-10">
                 <Link href="/">
                   <h1>Home</h1>
                 </Link>
@@ -145,7 +147,7 @@ export default async function Home() {
       </div>
       {/* Carousel */}
       <div className="flex min-w-full bg-abu-muda-300 w-full ">
-        <div className="flex flex-col w-full mx-32  relative">
+        <div className="flex flex-col w-full mx-32 relative">
           <Carousel>
             <CarouselContent>
               {Array.isArray(news.data) &&
@@ -185,7 +187,7 @@ export default async function Home() {
       </div>
       {/* End Carousel */}
 
-      <div className="flex justify-between space-x-3 mx-8 mt-20 rounded-xl pb-72">
+      <div className="flex justify-between space-x-3 md:justify-center md:gap-6 lg:mx-8 mt-20 rounded-xl pb-72 ">
         <div className="flex flex-col h-full space-y-4">
           <div className="flex flex-col w-80 h-full border border-slate-300 rounded-xl">
             <div className="flex flex-row items-center justify-between bg-sky-500 w-full h-12 text-white">
@@ -317,8 +319,8 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-auto h-full">
-          <div className="flex flex-col w-[800px] h-full border border-slate-300 rounded-xl pb-16 shadow-lg">
+        <div className="flex flex-col w-auto h-full md:hidden lg:flex xl:flex">
+          <div className="flex flex-col h-full border border-slate-300 rounded-xl pb-16 shadow-lg">
             <div className="flex flex-row items-center justify-between bg-sky-500 w-full h-12 text-white">
               <h1 className="mr-10 text-xl font-semibold ml-4">
                 Berita Liga 1 2023-2024
@@ -355,18 +357,15 @@ export default async function Home() {
             </div>
             <div className="flex h-auto pb-10 space-y-2 mx-2 flex-col">
               {highlights.data.slice(0, 4).map((data: any, index: number) => (
-                <>
-                  <div className="flex ">
+                  <div className="flex" key={index}>
                     <Image
                       src={data.thumbnail}
                       alt={data.title}
-                      key={index}
                       width={100}
                       height={100}
                       className="w-full object-cover rounded-xl mt-2"
                     />
                   </div>
-                </>
               ))}
             </div>
           </div>
@@ -413,6 +412,94 @@ export default async function Home() {
                 ))}
               </TableBody>
             </Table>
+          </div>
+        </div>
+      </div>
+      {/* footer */}
+      <div className="flex bg-slate-600 justify-center space-x-36 pt-24 w-full h-80">
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-bold">LIGA INDONESIA</h1>
+          <div className="link text-sm leading-6 mt-3">
+            <Link href={"/"}>
+            <h1>Beranda</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Jadwal & Hasil</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Klasemen</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Klub</h1>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-bold">MEDIA</h1>
+          <div className="link text-sm leading-6 mt-3">
+            <Link href={"/"}>
+            <h1>Berita</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Rilis</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Galeri Foto</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Cuplikan</h1>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-bold">STATISTIK</h1>
+          <div className="link text-sm leading-6 mt-3">
+            <Link href={"/"}>
+            <h1>Booklet Mingguan</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Top Aksi Club</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Top Aksi Pemain</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Statistik Club</h1>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-bold">MEDIA SOSIAL</h1>
+          <div className="flex gap-4 link text-sm leading-6 mt-3">
+            <Link href={"/"}>
+            <h1>Booklet</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Top</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1> Aksi </h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Statistik </h1>
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col text-white">
+          <h1 className="text-lg font-bold">DOWNLOAD</h1>
+          <div className="link text-sm leading-6 mt-3">
+            <Link href={"/"}>
+            <h1>Regulasi</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Komdis</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>FIFA Laws Of The Game</h1>
+            </Link>
+            <Link href={"/"}>
+            <h1>Report</h1>
+            </Link>
           </div>
         </div>
       </div>
